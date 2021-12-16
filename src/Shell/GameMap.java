@@ -119,11 +119,11 @@ public class GameMap extends JPanel {
         g.setColor(Color.RED);
         ((Graphics2D)g).setStroke(new BasicStroke(4f));
         if(start.x==finish.x){
-            g.drawLine(start.x*cellWight+cellWight/2,start.y*cellHeight,finish.x*cellWight+cellWight/2,finish.y+cellHeight);
+            g.drawLine(start.x*cellWight+cellWight/2,start.y*cellHeight,finish.x*cellWight+cellWight/2,finish.y*cellHeight);
         }else if(start.y==finish.y){
-            g.drawLine(start.x*cellWight,start.y*cellHeight+cellHeight/2,finish.x*cellWight,finish.y+cellHeight+cellHeight/2);
+            g.drawLine(start.x*cellWight,start.y*cellHeight+cellHeight/2,finish.x*cellWight,finish.y+cellHeight*cellHeight/2);
         }else{
-            g.drawLine(start.x*cellWight,start.y*cellHeight,finish.x*cellWight,finish.y+cellHeight);
+            g.drawLine(start.x*cellWight,start.y*cellHeight,finish.x*cellWight,finish.y*cellHeight);
         }
 
 

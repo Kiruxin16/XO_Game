@@ -14,6 +14,11 @@ public class GameMeth {
     public static Random rand = new Random();
     public static int logRow;               //Запоминаем, куда игрок поставил последнюю фишку.
     public static int logColumn;
+    public static String result;
+    public static MarkCoords start =new MarkCoords();
+    public static MarkCoords finish =new MarkCoords();
+
+
 
     public static char[][] map;
 
@@ -62,21 +67,34 @@ public class GameMeth {
 
    public static boolean isThatWin(char dot) {
        int column = 0, row = 0, diagStr = 0, diagRev = 0; //счетчики полос совпадения
+       MarkCoords tempStart1=new MarkCoords();
+       MarkCoords tempStart2=new MarkCoords();
+
 
        //проверка горизонталей и вертикалей
        for (int i = 0; i < sizeM; i++) {
            for (int j = 0; j < sizeM; j++) {
                if (map[i][j] == dot) {
+                   if (row ==0){
+                       tempStart1.setCoords(j,i);
+                   }
                    row++;
                    if (row == winStreakM) {
+                       start=tempStart1;
+                       finish.setCoords(j,i);
                        return true;
                    }
                } else {
                    row = 0;
                }
                if (map[j][i] == dot) {
+                   if (column ==0){
+                       tempStart2.setCoords(i,j);
+                   }
                    column++;
                    if (column == winStreakM) {
+                       start=tempStart2;
+                       finish.setCoords(i,j);
                        return true;
                    }
                } else {
@@ -95,13 +113,26 @@ public class GameMeth {
                if(map[i][j]==dot||map[sizeM -i-1][j]==dot) {
                    for (int k = 0; k < winStreakM; k++) {
                        if (map[i + k][j + k] == dot) {
+                           if (diagStr==0){
+                               tempStart1.setCoords(j,i);
+                           }
                            diagStr++;
                        }
                        if (map[sizeM - (i + k+1)][j + k] == dot) {
+                           if(diagRev==0){
+                               tempStart2.setCoords(j,sizeM-i-1);
+                           }
                            diagRev++;
                        }
                    }
-                   if (diagStr == winStreakM || diagRev == winStreakM) {
+                   if (diagStr == winStreakM) {
+                       start=tempStart1;
+                       finish.setCoords(j+winStreakM,i+winStreakM);
+                       return true;
+                   }
+                   if (diagRev==winStreakM){
+                       start=tempStart2;
+                       finish.setCoords(j+winStreakM,sizeM-i-1-winStreakM);
                        return true;
                    }
                    diagStr=0;
@@ -173,22 +204,22 @@ public class GameMeth {
         isGameFinished=true;
         printMap();
         if (isThatWin(DOT_X)) {
-            System.out.println("Поздравляем! Вы выйграли!");
+            result="Поздравляем! Вы выйграли!";
             return;
         }
         if (isDraw()) {
-            System.out.println("Ничья");
+            result="Ничья";
             return;
         }
 
         aiTurn();
         printMap();
         if (isThatWin(DOT_O)) {
-            System.out.println("Выйграл компьютер");
+            result ="Выйграл компьютер";
             return;
         }
         if (isDraw()) {
-            System.out.println("Ничья");
+            result="Ничья";
             return;
         }
 

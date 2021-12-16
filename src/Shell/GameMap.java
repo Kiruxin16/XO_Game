@@ -1,6 +1,7 @@
 package Shell;
 
 import Logic.GameMeth;
+import Logic.MarkCoords;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +10,7 @@ import java.awt.event.MouseEvent;
 
 public class GameMap extends JPanel {
     private GameWindow gameWindow;
+    private ResultWindow resultWindow;
     private int size;
     private int winStreak;
 
@@ -21,6 +23,7 @@ public class GameMap extends JPanel {
     public GameMap(GameWindow gameWindow) {
         this.gameWindow = gameWindow;
         setBackground(Color.ORANGE);
+        resultWindow =new ResultWindow(this);
 
 
         addMouseListener(new MouseAdapter() {
@@ -30,6 +33,10 @@ public class GameMap extends JPanel {
                 int cellY = e.getY()/cellHeight;
                 if (!GameMeth.isGameFinished) {
                     GameMeth.userTurn(cellX, cellY);
+                }
+                if (GameMeth.isGameFinished){
+                    ResultWindow.endMess.setText(GameMeth.result);
+                    resultWindow.setVisible(true);
                 }
             }
         });
@@ -70,10 +77,17 @@ public class GameMap extends JPanel {
                 if(GameMeth.map[i][j]==GameMeth.DOT_X){
                     drawX(g,i,j);
                 }
+                if(GameMeth.map[i][j]==GameMeth.DOT_O){
+                    drawO(g,i,j);
+                }
 
             }
 
         }
+        if (GameMeth.isGameFinished && !GameMeth.isDraw()){
+            finishLine(g,GameMeth.start,GameMeth.finish);
+        }
+
         repaint();
 
        /* g.setColor(Color.BLUE);
@@ -84,13 +98,34 @@ public class GameMap extends JPanel {
     }
 
     private void drawX(Graphics g, int cellY,int cellX){
-        g.setColor(Color.RED);
+        g.setColor(Color.GREEN);
         ((Graphics2D)g).setStroke(new BasicStroke(6f));
 
         g.drawLine((cellX * cellWight)+15, (cellY*cellHeight)+15,
                 (cellX*cellWight+cellWight)-15,(cellY*cellHeight+cellHeight)-15);
-        g.drawLine((cellX * cellWight)+15, (cellY*cellHeight+cellHeight)-15,
+        g.drawLine((cellX * cellWight)+15, (cellY*cellHeight+cellHeight)-15, //обратная полоса
                 (cellX*cellWight+cellWight)-15,(cellY*cellHeight)+15);
+
+    }
+
+    private void drawO(Graphics g, int cellY,int cellX){
+        g.setColor(Color.BLUE);
+        ((Graphics2D)g).setStroke(new BasicStroke(6f));
+
+        g.drawOval(cellX*cellWight+15,cellY*cellHeight+10,cellWight-30,cellHeight-20);
+    }
+
+    private void finishLine (Graphics g,MarkCoords start,MarkCoords finish){
+        g.setColor(Color.RED);
+        ((Graphics2D)g).setStroke(new BasicStroke(4f));
+        if(start.x==finish.x){
+            g.drawLine(start.x*cellWight+cellWight/2,start.y*cellHeight,finish.x*cellWight+cellWight/2,finish.y+cellHeight);
+        }else if(start.y==finish.y){
+            g.drawLine(start.x*cellWight,start.y*cellHeight+cellHeight/2,finish.x*cellWight,finish.y+cellHeight+cellHeight/2);
+        }else{
+            g.drawLine(start.x*cellWight,start.y*cellHeight,finish.x*cellWight,finish.y+cellHeight);
+        }
+
 
     }
 }

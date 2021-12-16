@@ -13,6 +13,8 @@ public class GameWindow extends JFrame {
     static final int WINDOW_HEIGHT=555;
     private SettingWindow settingWindow;
     private GameMap gameMap;
+    private ResultWindow resultWindow;
+
 
     public GameWindow(){
         setBounds(WINDOW_POS_X,WINDOW_POS_Y,WINDOW_WITH,WINDOW_HEIGHT);

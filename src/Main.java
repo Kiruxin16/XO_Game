@@ -1,32 +1,32 @@
 public class Main {
 
-    public static void main(String[] args) {
-        GameMeth.initialMap();
-        GameMeth.printMap();
+  /*  public static void main(String[] args) {
+        logic.GameMeth.initialMap();
+        logic.GameMeth.printMap();
 
         while (true)
         {
-            GameMeth.userTurn();
-            GameMeth.printMap();
-            if (GameMeth.isThatWin(GameMeth.DOT_X)){
+            logic.GameMeth.userTurn();
+            logic.GameMeth.printMap();
+            if (logic.GameMeth.isThatWin(logic.GameMeth.DOT_X)){
                 System.out.println("Поздравляем! Вы выйграли!");
                 break;
             }
-            if (GameMeth.isDraw()){
+            if (logic.GameMeth.isDraw()){
                 System.out.println("Ничья");
                 break;
             }
 
-            GameMeth.aiTurn();
-            GameMeth.printMap();
-            if (GameMeth.isThatWin(GameMeth.DOT_O)){
+            logic.GameMeth.aiTurn();
+            logic.GameMeth.printMap();
+            if (logic.GameMeth.isThatWin(logic.GameMeth.DOT_O)){
                 System.out.println("Выйграл компьютер");
                 break;
             }
-            if (GameMeth.isDraw()){
+            if (logic.GameMeth.isDraw()){
                 System.out.println("Ничья");
             }
 
         }
-    }
+    }*/
 }

@@ -81,7 +81,7 @@ public class GameMeth {
                    row++;
                    if (row == winStreakM) {
                        start=tempStart1;
-                       finish.setCoords(j,i);
+                       finish.setCoords(j+1,i);
                        return true;
                    }
                } else {
@@ -94,7 +94,7 @@ public class GameMeth {
                    column++;
                    if (column == winStreakM) {
                        start=tempStart2;
-                       finish.setCoords(i,j);
+                       finish.setCoords(i,j+1);
                        return true;
                    }
                } else {
@@ -120,7 +120,7 @@ public class GameMeth {
                        }
                        if (map[sizeM - (i + k+1)][j + k] == dot) {
                            if(diagRev==0){
-                               tempStart2.setCoords(j,sizeM-i-1);
+                               tempStart2.setCoords(j,sizeM-i);
                            }
                            diagRev++;
                        }
@@ -132,7 +132,7 @@ public class GameMeth {
                    }
                    if (diagRev==winStreakM){
                        start=tempStart2;
-                       finish.setCoords(j+winStreakM,sizeM-i-1-winStreakM);
+                       finish.setCoords(j+winStreakM,sizeM-i-winStreakM);
                        return true;
                    }
                    diagStr=0;

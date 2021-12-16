@@ -8,9 +8,9 @@ import java.awt.event.ActionListener;
 
 public class ResultWindow extends JFrame {
 
-    static final int WINDOW_POS_X=GameWindow.WINDOW_POS_X+150;
+    static final int WINDOW_POS_X=GameWindow.WINDOW_POS_X+100;
     static final int WINDOW_POS_Y=GameWindow.WINDOW_POS_Y+200;
-    static final int WINDOW_WITH =220;
+    static final int WINDOW_WITH =355;
     static final int WINDOW_HEIGHT=155;
     static Label endMess;
 
